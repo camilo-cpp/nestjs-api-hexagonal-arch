@@ -1,3 +1,4 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -14,10 +15,12 @@ import { GetClientByIdController } from '@client-infrastructure/primary/controll
 import { GetClientByIdRepository } from '@client-infrastructure/secondary/repositories/get-client-by-id.repository';
 import { GetClientByIdService } from '@client-domain/services/get-client-by-id.service';
 import { GetClientByIdUseCase } from '@client-application/get-client-by-id.use-case';
+import { RedisCacheConfig } from 'src/config/cache';
 
 @Module({
   controllers: [GetClientByIdController],
   imports: [
+    CacheModule.registerAsync(RedisCacheConfig),
     MongooseModule.forFeature([
       { name: ClientModel.name, schema: ClientSchema },
     ]),
