@@ -2,8 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ClientModule } from './client/infrastructure/primary/modules/client.module';
 import { ValidatorEnv } from './config/validators.env';
 
 @Module({
@@ -18,8 +17,7 @@ import { ValidatorEnv } from './config/validators.env';
       }),
       inject: [ConfigService],
     }),
+    ClientModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
