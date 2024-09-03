@@ -1,9 +1,17 @@
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import {
+  Controller,
+  Get,
+  Inject,
+  Param,
+  UseInterceptors,
+} from '@nestjs/common';
 
 import { GET_CLIENT_BY_ID_USE_CASE } from '@client-domain/constants/injections.constants';
 import { GetClientByIdUseCasePort } from '@client-domain/ports/queires.use-case.port';
 
 @Controller('client')
+@UseInterceptors(CacheInterceptor)
 export class GetClientByIdController {
   constructor(
     @Inject(GET_CLIENT_BY_ID_USE_CASE)
