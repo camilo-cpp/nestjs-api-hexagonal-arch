@@ -58,6 +58,7 @@ export class GetClientByIdRepository implements GetClientByIdRepositoryPort {
 
       return clientEntity;
     } catch (error) {
+      if (error instanceof HttpException) throw error;
       throw new HttpException(error.message, 500);
     }
   }
